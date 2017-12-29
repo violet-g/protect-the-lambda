@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# check we can save the game state to a CSV file
+# in appropriate format
+${GAME:-protect-the-lambda} --test < input
+[ -f output.csv ] && echo "Found" || echo "Not found"
+wc -l output.csv
+head -n 1 output.csv | grep "to play"
+cat output.csv | grep ",L," | cut -d',' -f 9

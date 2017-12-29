@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+## anyone is allowed to pass over central square if it is empty
+${GAME:-protect-the-lambda} --test < input

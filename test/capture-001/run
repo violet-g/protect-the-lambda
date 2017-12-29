@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+## move from start to capture a G piece, 
+## then try to move it as if it's still there
+${GAME:-protect-the-lambda} --test < input

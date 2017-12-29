@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+##  no-one else allowed onto central square
+${GAME:-protect-the-lambda} --test < input

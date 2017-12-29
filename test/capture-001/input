@@ -1,0 +1,7 @@
+:start
+:move b5 b6
+:move e6 c6
+:move d9 d6
+:move c6 c7
+:stop
+:exit

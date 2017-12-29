@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+## move from start to capture a G piece,
+##then save the game and use grep
+## to check the piece has gone
+## 
+${GAME:-protect-the-lambda} --test < input
+grep "O,O, , ,L,G,G,O,O" test.csv

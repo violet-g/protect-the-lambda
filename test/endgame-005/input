@@ -1,0 +1,4 @@
+:start
+:load weakobjects.csv
+:move i8 f8
+:exit

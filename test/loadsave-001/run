@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+## load saved game state from file with load command
+${GAME:-protect-the-lambda} --test < input

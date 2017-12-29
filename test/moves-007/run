@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+## initial moves, with failed attempts to make moves
+## starting on empty squares (piece not there!)
+${GAME:-protect-the-lambda} --test < input
+

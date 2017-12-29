@@ -1,0 +1,7 @@
+:start
+:move d1 d4
+:move c5 c9
+:move d9 d6
+:save test.csv
+:stop
+:exit

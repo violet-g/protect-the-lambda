@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+${GAME:-protect-the-lambda} --test < input

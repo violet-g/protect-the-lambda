@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+## long sequence of legal moves
+${GAME:-protect-the-lambda} --test < input
+

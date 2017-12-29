@@ -1,0 +1,6 @@
+:start
+:move c1 c2
+:move f4 g4
+:move d1 d2
+:stop
+:exit

@@ -1,0 +1,4 @@
+:start
+:load game.csv
+:move i5 f5
+:exit

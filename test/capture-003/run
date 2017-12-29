@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+## move from start to a double capture scenario OGOGO
+## then try to move it as if captured pieces are still there
+${GAME:-protect-the-lambda} --test < input

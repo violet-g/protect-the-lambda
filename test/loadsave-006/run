@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# attempt to save file with save command, 
+# but unable to save, check for appropriate error msg
+chmod a-w output.csv
+${GAME:-protect-the-lambda} --test < input
+chmod a+w output.csv
+

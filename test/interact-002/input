@@ -1,0 +1,7 @@
+:start
+:move a4 a1
+:move a1 a4
+:move e4 a4
+:move a4 a1
+:stop
+:exit

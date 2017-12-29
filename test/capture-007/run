@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+## Capture a king on an ordinary square
+## This only requires 2 O pieces (standard custodial capture)
+## NOTE this test relies on loading and end-game result logic
+${GAME:-protect-the-lambda} --test < input

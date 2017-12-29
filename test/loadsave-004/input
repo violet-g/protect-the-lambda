@@ -1,0 +1,6 @@
+:start
+:load smallboard.csv
+:load missingfirstline.csv
+:load dodgychars.csv
+:stop
+:exit

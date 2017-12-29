@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+## several failed attempts to move pieces, not in straight line
+${GAME:-protect-the-lambda} --test < input
+

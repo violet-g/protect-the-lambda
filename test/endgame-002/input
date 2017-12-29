@@ -1,0 +1,4 @@
+:start
+:load kingvulnerable.csv
+:move f7 e7
+:exit

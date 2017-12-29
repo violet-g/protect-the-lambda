@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+## initial move, with failed attempts to move off the board
+## to illegal squares
+${GAME:-protect-the-lambda} --test < input
+

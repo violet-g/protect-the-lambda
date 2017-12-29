@@ -1,0 +1,4 @@
+:start
+:load surrounded.csv
+:move i1 i8
+:exit

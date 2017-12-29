@@ -1,0 +1,4 @@
+:start
+:load game.csv
+:move a7 e7
+:exit

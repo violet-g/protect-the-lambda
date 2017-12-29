@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+## initial moves, with failed attempts to jump over
+## other pieces (not allowed, can only move along empty squares)
+${GAME:-protect-the-lambda} --test < input
+

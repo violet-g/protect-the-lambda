@@ -1,0 +1,4 @@
+:start
+:load missing.csv
+:stop
+:exit

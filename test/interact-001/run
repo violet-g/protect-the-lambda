@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+${GAME:-protect-the-lambda} --test < input
+[ -f output.csv ] && echo "Found" || echo "Not found"

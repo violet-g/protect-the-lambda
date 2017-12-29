@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+## initial move, start with the right player
+${GAME:-protect-the-lambda} --test < input
+

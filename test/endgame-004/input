@@ -1,0 +1,5 @@
+:start
+:load ending.csv
+:move e9 a9
+:move f7 e7
+:exit

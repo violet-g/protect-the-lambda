@@ -1,0 +1,4 @@
+:start
+:save output.csv
+:stop
+:exit

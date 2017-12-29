@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+## attempt to load malformed files - check for error message
+${GAME:-protect-the-lambda} --test < input

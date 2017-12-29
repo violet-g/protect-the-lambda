@@ -1,0 +1,10 @@
+:start
+:move i4 f4
+:move c5 c4
+:move a4 b4
+:move e3 h3
+:move d1 d4
+:move c4 c3
+:move e4 e3
+:stop
+:exit

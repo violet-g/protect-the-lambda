@@ -1,0 +1,6 @@
+:start
+:load board.csv
+:move e5 f5
+:move d9 a9
+:move f5 e5
+:exit

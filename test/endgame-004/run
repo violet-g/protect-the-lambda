@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+##  load game, king can escape after G move -> 
+## eventually lambdas win  (after next O move)
+${GAME:-protect-the-lambda} --test < input

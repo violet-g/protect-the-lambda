@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+##  load game, last object caught, lambdas win
+${GAME:-protect-the-lambda} --test < input

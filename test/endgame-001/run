@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+## load game with O pieces stuck in corner -> draw (no move possible)
+${GAME:-protect-the-lambda} --test < input

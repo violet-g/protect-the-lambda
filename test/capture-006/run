@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+## Capture a king on square adjacent to central square (castle)
+## This requires 3 O pieces (on the three squares surrounding the king)
+## NOTE this test relies on loading and end-game result logic
+${GAME:-protect-the-lambda} --test < input
