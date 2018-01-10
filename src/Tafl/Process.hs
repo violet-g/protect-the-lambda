@@ -25,16 +25,21 @@ processCommand st Help = do
 processCommand st Exit = do
   putStrLn "Good Bye!"
   exitWith ExitSuccess
-
 processCommand st Start = do
-   let newSt = st {inGame=True}
-   putStrLn "Starting Game."
-   pure $ Right newSt
-
+  let newSt = st {inGame=True}
+  putStrLn "Starting Game."
+  let board = returnBoard $ currState st
+  mapM_ print board
+  pure $ Right newSt
 processCommand st Stop = do
-   let newSt = st {inGame=False}
-   putStrLn "Stopping Game."
-   pure $ Right newSt
+  let newSt = st {inGame=False}
+  putStrLn "Stopping Game."
+  pure $ Right newSt
+processCommand st (Move src dest) = do
+  if (inGame st == False) then
+    pure $ Left $ ForbiddenCommand
+  else do
+    move st src dest
 
 -- The remaining commands are to be added here.
 
@@ -51,7 +56,6 @@ processCommandStr st str =
     Left err   -> pure (Left err)
     Right cmd' -> processCommand st cmd'
 
-
 -- | Print an Error to STDOUT.
 printError :: TaflError -> IO ()
 printError (NotYetImplemented) = do
@@ -62,3 +66,5 @@ printError (InvalidCommand msg) = do
   putStrLn "You entered an invalid command:"
   putStr "\t"
   putStrLn msg
+printError (ForbiddenCommand msg) = do
+  putStrLn "The command cannot be used"

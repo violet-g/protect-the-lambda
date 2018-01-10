@@ -73,7 +73,7 @@ To run all the black-box tests, this is the sequence I go through ...
 ```sh
 $ cabal sandbox init
 $ cabal install --only-dependencies
-$ cabal install --only-dependences --enable-tests
+$ cabal install --only-dependencies --enable-tests
 $ cabal build
 $ cabal install
 $ cabal test

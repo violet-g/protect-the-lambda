@@ -1,3 +1,5 @@
 .cabal-sandbox
 .stack-work
 test/*/output
+dist
+cabal.sandbox.config
