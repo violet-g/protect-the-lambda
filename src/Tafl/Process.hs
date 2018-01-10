@@ -37,9 +37,9 @@ processCommand st Stop = do
   pure $ Right newSt
 processCommand st (Move src dest) = do
   if (inGame st == False) then
-    pure $ Left $ ForbiddenCommand
+    pure $ Left ForbiddenCommand
   else do
-    move st src dest
+    pure $ move st src dest
 
 -- The remaining commands are to be added here.
 
@@ -66,5 +66,5 @@ printError (InvalidCommand msg) = do
   putStrLn "You entered an invalid command:"
   putStr "\t"
   putStrLn msg
-printError (ForbiddenCommand msg) = do
+printError (ForbiddenCommand) = do
   putStrLn "The command cannot be used"

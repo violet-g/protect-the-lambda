@@ -7,6 +7,7 @@ module Tafl.Core
   ( GameState(..)
   , TaflError(..)
   , Command(..)
+  , Tile(..)
   , defaultGameState
   , initGameState
   , commandFromString
@@ -26,7 +27,7 @@ import Data.Csv
 import Data.Maybe
 
 -- A tile can be occupied by an Object, a Lambda, a Guard, or could simply be empty
-data Tile = O | L | G | E deriving Show
+data Tile = O | L | G | E deriving (Show, Eq)
 
 -- | The core game state that captures the state of the board, and
 -- whether we are playing a game or not.
@@ -100,7 +101,8 @@ data TaflError = InvalidCommand String
                | UnknownCommand
                | FileDoesNotExist String
                | NotYetImplemented
-               | ForbiddenCommand String
+               | ForbiddenCommand
+               | InvalidMove
 
 -- | REPL commands, you will need to extend this to capture all permissible REPL commands.
 data Command = Help
