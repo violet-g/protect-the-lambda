@@ -12,6 +12,7 @@ import System.IO
 
 import Tafl.Core
 import Tafl.Process
+import Control.Monad
 
 
 -- | Core REPL for processing user actions.
@@ -27,10 +28,12 @@ repl st = do
     doREPL st = do
       putStr "tafl> "
       raw_cmd <- getLine
+      when (inTestMode st) $ putStr "\n"
       result  <- processCommandStr st raw_cmd
       case result of
         (Left err) -> do
           printError err
           repl st
 
-        (Right newSt) -> repl newSt
+        (Right newSt) -> do
+          repl newSt

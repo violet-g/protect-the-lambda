@@ -1,0 +1,15 @@
+Status Report
+Gabriela Georgieva, 2130120G
+
+1) Functionality:
+ - move and capture functionalities have been implemented and tested in the command line,
+   code is split into small functions and is documented
+ - load is implemented and works as expected when a file is given but does not have error checking
+ - save command has not been implemented
+
+2) Testing
+ I was working on a lab machine and was running the tests by following the commands given but I got odd behaviour:
+ I did not get any output from my programme and all tests output fail because of this issue. That is why I did
+ functionality testing by exhausting combinations
+
+

@@ -1,13 +1,13 @@
 {- |
 This module defines several core data structures used by the game.
 -}
-{-# LANGUAGE OverloadedStrings #-}
 
 module Tafl.Core
   ( GameState(..)
   , TaflError(..)
   , Command(..)
   , Tile(..)
+  , Player(..)
   , defaultGameState
   , initGameState
   , commandFromString
@@ -21,27 +21,26 @@ import System.Directory
 import System.Exit
 import Data.List
 import Data.List.Split (splitOn)
-import qualified Data.ByteString.Lazy as BL
-import qualified Data.Vector as V
 import Data.Csv
 import Data.Maybe
 
--- A tile can be occupied by an Object, a Lambda, a Guard, or could simply be empty
+-- | A tile can be occupied by an Object, a Lambda, a Guard, or could simply be empty
 data Tile = O | L | G | E deriving (Show, Eq)
 
+-- | A player is either an attacker, or a Defender
+data Player = Attacker | Defender deriving (Show,Eq)
+
 -- | The core game state that captures the state of the board, and
--- whether we are playing a game or not.
---
--- You will need to extend this to present the board.
+-- | whether we are playing a game or not.
 data GameState = GameState
   { inGame     :: Bool
   , inTestMode :: Bool
-  , nextPlayer :: Tile
+  , player :: Player
   , currState  :: [[Tile]]
   }
 
+-- | Default board
 startState :: [[Tile]]
--- emptyState = replicate 9 (replicate 9 Empty)
 startState = [[E, E, E, O, O, O, E, E, E],
               [E, E, E, E, O, E, E, E, E],
               [E, E, E, E, G, E, E, E, E],
@@ -52,16 +51,10 @@ startState = [[E, E, E, O, O, O, E, E, E],
               [E, E, E, E, O, E, E, E, E],
               [E, E, E, O, O, O, E, E, E]]
 
+-- | Game state at the beginning
 defaultGameState :: Bool -> GameState
-defaultGameState b = GameState False b L startState
+defaultGameState b = GameState True b Attacker startState
 
-charToTile :: String -> Tile
-charToTile "O" = O
-charToTile "L" = L
-charToTile "G" = G
-charToTile " " = E
-
--- Finish initGameState to read a board state from file.
 initGameState :: Maybe FilePath
               -> Bool -- In test mode or not?
               -> IO (Either TaflError GameState)
@@ -70,22 +63,41 @@ initGameState (Just f) b = do
   withFile f ReadMode (\handle -> do
     contents <- hGetContents handle
     let fileLines = lines contents
-    let turn = head (head fileLines) -- char to represent next player
-    let player = (if turn == 'O' then O else G) -- error checking
-    let boardList = tail fileLines -- list with csv data
-    let boardChar = map (splitOn ",") boardList --[[]]
-    let board = map (map charToTile) boardChar
+    let turn = head (head fileLines)
+    let player = (if turn == 'O' then Attacker else Defender)
+    let board = map (map charToTile) (map (splitOn ",") (tail fileLines))
     pure $ Right $ GameState True b player board
     )
-  pure $ Left $ UnknownCommand
+  --pure $ Left $ CommandCannotBeUsed
 
-  -- let convertToList = \(t1, t2, t3, t4, t5, t6, t7, t8, t9) -> [t1, t2, t3, t4, t5, t6, t7, t8, t9]
-  -- let boardV = V.map convertToList v --V.forM_ v $ \(t1, t2, t3, t4, t5, t6, t7, t8, t9) -> [t1, t2, t3, t4, t5, t6, t7, t8, t9]
-  -- let boardL = V.toList boardV
-  -- turn v into a [[Tile]]
-  -- construt the game state
 
-    -- V.forM_ v $ \(x,y) -> (putStrLn $ x ++ "'s favourite colour is " ++ y)
+{-
+-- Finish initGameState to read a board state from file.
+initGameState :: Maybe FilePath
+              -> Bool -- In test mode or not?
+              -> IO (Either TaflError GameState)
+initGameState Nothing b = pure $ Right $ defaultGameState b
+initGameState (Just f) b = do
+  result <- try (res) :: IO (Either Exception Int)
+    where res = withFile f ReadMode (\handle -> do
+            contents <- hGetContents handle
+            let turn = head (head (lines contents)) -- char to represent next player
+            let player = (if turn == 'O' then Attacker else Defender) -- error checking
+            let boardList = tail fileLines -- list with csv data
+            let boardChar = map (splitOn ",") boardList --[[]]
+            let board = map (map charToTile) boardChar
+      --putStrLn "Inside first"
+    )
+    case result of
+      Left ex  -> pure $ Right $ GameState True b player board
+      Right val -> pure $ Left $ CannotLoadSavedGame
+-}
+
+charToTile :: String -> Tile
+charToTile "O" = O
+charToTile "L" = L
+charToTile "G" = G
+charToTile _ = E
 
 tileToChar :: Tile -> String
 tileToChar O = "O"
@@ -93,18 +105,21 @@ tileToChar L = "L"
 tileToChar G = "G"
 tileToChar E = " "
 
+-- | Return the board ready to be printed
 returnBoard :: [[Tile]] -> [[String]]
 returnBoard board = map (map tileToChar) board
 
--- | Errors encountered by the game, you will need to extend this to capture *ALL* possible errors.
+-- | Errors encountered by the game
 data TaflError = InvalidCommand String
                | UnknownCommand
                | FileDoesNotExist String
                | NotYetImplemented
                | ForbiddenCommand
                | InvalidMove
+               | CommandCannotBeUsed
+               | CannotLoadSavedGame
 
--- | REPL commands, you will need to extend this to capture all permissible REPL commands.
+-- | REPL commands
 data Command = Help
              | Exit
              | Start
@@ -143,3 +158,4 @@ help_text = unlines $
   where
     prettyCmdHelp :: (String, String) -> String
     prettyCmdHelp (cmd, help) = concat ["\t:", cmd, "\t", " "] ++ help
+
